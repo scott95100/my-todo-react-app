@@ -5,7 +5,7 @@ import Todo from './Todo';
 const Todos = (props) => {
     const listOfTodos = props.todos.map((todoData, index)=> {
       return (
-          <Todo key={todoData._id} todo={todoData} />
+          <Todo key={todoData._id} todo={todoData} deleteTodo={props.deleteTodo}/>
       )
     })
 

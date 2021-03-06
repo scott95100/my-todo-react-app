@@ -28,13 +28,23 @@ export default function TodosContainer(){
         // putting new one at the end
         setTodos([...todos, anotherTodo.data])
     }
+    const deleteTodo = async(todo) => {
+        console.log(todo)
+        const deletedTodo = await TodoModel.delete(todo)
+        //filter is going to check and remove the underlying id that was passed in
+        let tempTodos = [...todos].filter((eachTodo) =>{
+            return eachTodo._id !== deletedTodo.data._id
+        })
+        setTodos(tempTodos)
+        //we will have to update this.state
 
+    }
 
 
     return (
         <div className='todosContainer'>
             <CreateTodoForm createTodo={createTodo} />
-            <Todos todos={todos} />
+            <Todos todos={todos} deleteTodo={deleteTodo}/>
             <h1>TodosContainer</h1>
         </div>
     );
